@@ -29,3 +29,5 @@ else
     # calling function to check for dependencies
     removeFiles
 fi
+
+# Developed by Subin Gyawali
