@@ -109,3 +109,5 @@ else
     # calling function to check for dependencies
     checkDependencies
 fi
+
+# Developed by Subin Gyawali
