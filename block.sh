@@ -32,28 +32,40 @@ installFolders(){
     sudo cp block.sh unblock.sh "${INSTALL_PATH}focused-linux"
     # Making list file to hold sites' list to block
     FULL_PATH="${INSTALL_PATH}focused-linux/sites-list"
-    # Removing file if already exists and recreating
-    sudo rm -rf "${FULL_PATH}"
-    sudo touch "${FULL_PATH}"
-    # changing the file permission
-    sudo chmod 777 "${FULL_PATH}"
-    # Setting some default configurations for the files
-    sudo printf "# This file holds the list of the sites you want to block\n# Add the domain name of the sites you want to block\n\n# Some of the most popular distraction sites have been configured by default\n# You can remove existing default sites if you want\n# If you do not want to edit this file, just save and exit the editor\n\n# Default Sites\n\n" >> "${FULL_PATH}"
-    sudo printf "facebook.com\ntwitter.com\ninstagram.com\nyoutube.com\nnetflix.com\nhulu.com\ntwitch.tv\npinterest.com\ntumblr.com\nvimeo.com\nlinkedin.com\nquora.com\ntinder.com\n\n" >> "${FULL_PATH}"
-    sudo printf "# Add your sites after this line (one site in each line)" >> "${FULL_PATH}"
-    tput setaf 2
-    tput bold
-    printf "\nFiles Created!\n"
-    tput setaf 3
-    printf "\nOpening your sites list in the editor...\n"
-    tput sgr0 
-    # Opening file in nano editor to allow editing
-    sudo nano "${FULL_PATH}"    
-    tput setaf 3
-    tput bold
-    printf "\nConfiguring Files...\n"
-    # calling function to configure files
-    configureFiles
+
+    # Checking if the list file already exists 
+    if [ -f "$FULL_PATH" ]; then
+        # changing the file permission
+        sudo chmod 777 "${FULL_PATH}"
+        # Opening file in nano editor to allow editing
+        sudo nano "${FULL_PATH}"    
+        tput setaf 3
+        tput bold
+        printf "\nConfiguring Files...\n"
+        # calling function to configure files
+        configureFiles
+    else 
+        sudo touch "${FULL_PATH}"
+        # changing the file permission
+        sudo chmod 777 "${FULL_PATH}"
+        # Setting some default configurations for the files
+        sudo printf "# This file holds the list of the sites you want to block\n# Add the domain name of the sites you want to block\n\n# Some of the most popular distraction sites have been configured by default\n# You can remove existing default sites if you want\n# If you do not want to edit this file, just save and exit the editor\n\n# Default Sites\n\n" >> "${FULL_PATH}"
+        sudo printf "facebook.com\ntwitter.com\ninstagram.com\nyoutube.com\nnetflix.com\nhulu.com\ntwitch.tv\npinterest.com\ntumblr.com\nvimeo.com\nlinkedin.com\nquora.com\ntinder.com\n\n" >> "${FULL_PATH}"
+        sudo printf "# Add your sites after this line (one site in each line)" >> "${FULL_PATH}"
+        tput setaf 2
+        tput bold
+        printf "\nFiles Created!\n"
+        tput setaf 3
+        printf "\nOpening your sites list in the editor...\n"
+        tput sgr0
+        # Opening file in nano editor to allow editing
+        sudo nano "${FULL_PATH}"    
+        tput setaf 3
+        tput bold
+        printf "\nConfiguring Files...\n"
+        # calling function to configure files
+        configureFiles 
+    fi
 }
 
 configureFiles(){
